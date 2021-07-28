@@ -15,6 +15,8 @@ const code = {
                 'js': 1,
                 'ts': 1,
                 'jsx': 1,
+                'html': 1,
+                'css': 1,
                 'json': 1,
                 'http': 1
             },
