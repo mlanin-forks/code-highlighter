@@ -53,7 +53,7 @@ async function bottomBarAction(){
 async function showSettings(){
     miro.board.ui.openModal('settings.html', {
         width: 600,
-        height: 300
+        height: 600
     });
 }
 
@@ -70,7 +70,6 @@ function highlightWidgets(widgets) {
         if (highlightedText.length >= MAX_TEXT_SIZE) {
             miro.showErrorNotification('Highlight failed, due to possible loss of data');
             const message = `Highlighted length: ${highlightedText.length} Cleaned length: ${plainText.length}  Widget text length: ${widget.text.length}`;
-            Sentry.captureMessage(message);
             console.warn(message);
             continue;
         }

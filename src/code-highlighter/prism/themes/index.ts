@@ -1,5 +1,5 @@
-import {DefaultThemeRegistry} from "./DefaultThemeRegistry";
-import {ThemeImpl} from "./ThemeImpl";
+import { DefaultThemeRegistry } from "./DefaultThemeRegistry";
+import { ThemeImpl } from "./ThemeImpl";
 // themes
 import defaultData from "./data/default.theme"
 import okadiaData from "./data/okaidia.theme"
@@ -8,7 +8,7 @@ import tomorrowNightData from "./data/tomorrow-night.theme"
 import vsData from "./data/vs.theme"
 import materialLightData from "./data/material-light.theme"
 
-const defaultTheme = new ThemeImpl('default', '#000000', '#f5f2f0', defaultData);
+const defaultTheme = new ThemeImpl('default', '#000000', 'transparent', defaultData);
 
 export const themeRegistry = new DefaultThemeRegistry(defaultTheme);
 // register themes

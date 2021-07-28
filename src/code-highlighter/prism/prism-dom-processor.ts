@@ -1,12 +1,12 @@
-import {DOMProcessor} from "./prism-language-highlighter";
-import {DOM} from "../config";
-import {ThemeContext} from "./themes/interfaces";
+import { DOMProcessor } from "./prism-language-highlighter";
+import { DOM } from "../config";
+import { ThemeContext } from "./themes/interfaces";
 
 export class PrismDOMProcessor implements DOMProcessor {
     private _lang: string;
     private _tokenFactory: TokenFactory;
 
-    constructor(lang:string, nodeFactory: TokenFactory) {
+    constructor(lang: string, nodeFactory: TokenFactory) {
         this._lang = lang;
         this._tokenFactory = nodeFactory;
     }
@@ -24,19 +24,8 @@ export class PrismDOMProcessor implements DOMProcessor {
         return html.replace(/(\t)/g, '    ');
     }
 
-    private static replacesBreaks(html:string): string  {
-        let result = html.replace(/\n/gm, '</p><p>');
-        if (result.startsWith('</p>')){
-            result = result.substring(4);
-        } else {
-            result = '<p>' + result;
-        }
-        if (result.endsWith('<p>')){
-            result = result.substring(0, result.length - 3);
-        } else {
-            result += '</p>';
-        }
-        return result;
+    private static replacesBreaks(html: string): string {
+        return html.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
     private transform(parent: Node, out: Node) {
@@ -83,7 +72,7 @@ export class PrismDOMProcessor implements DOMProcessor {
     }
 
     private applyStyles(target: Node) {
-        if (!(target instanceof HTMLElement)){
+        if (!(target instanceof HTMLElement)) {
             return;
         }
         ThemeContext.getInstance().currentTheme.applyStyle(this._lang, target.className, target);

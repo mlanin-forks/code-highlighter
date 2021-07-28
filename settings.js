@@ -4,7 +4,7 @@ const code = {
             _langKey_fallback_1: 'code.highlighter.lang',
             _langKey: 'ch_lang',
             _themeKey: 'ch_theme',
-            _defaultLang: 'ts',
+            _defaultLang: 'json',
             languages:{
                 'php': 1,
                 'go': 1,
@@ -18,7 +18,8 @@ const code = {
                 'html': 1,
                 'css': 1,
                 'json': 1,
-                'http': 1
+                'http': 1,
+                'bash': 1
             },
             themes: {
                 'Default (PrismJS)': 'default',

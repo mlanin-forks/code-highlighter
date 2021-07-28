@@ -1,13 +1,12 @@
 import IWidget = SDK.IWidget;
-import * as Sentry from '@sentry/browser';
-import {default as highlighter} from '../code-highlighter/prism';
-import {default as settings} from '../settings/settings'
-import {ThemeContext} from "../code-highlighter/prism/themes/interfaces";
-import {themeRegistry} from "../code-highlighter/prism/themes";
-import {DEFAULT_THEME} from "../code-highlighter/config";
+import { default as highlighter } from '../code-highlighter/prism';
+import { default as settings } from '../settings/settings'
+import { ThemeContext } from "../code-highlighter/prism/themes/interfaces";
+import { themeRegistry } from "../code-highlighter/prism/themes";
+import { DEFAULT_THEME } from "../code-highlighter/config";
 
 function getWidgetText(widget: any): string {
-    if (widget.text){
+    if (widget.text) {
         return widget.text;
     } else {
         return '';
@@ -111,9 +110,9 @@ async function hasPermission(permission: String) {
     return false;
 }
 
-async function bottomBarAction(){
+async function bottomBarAction() {
     const widgets = await miro.board.selection.get();
-    if (widgets.length === 0){
+    if (widgets.length === 0) {
         await showSettings();
     } else {
         await reselectWidgets(widgets);
@@ -122,7 +121,7 @@ async function bottomBarAction(){
 }
 
 async function reselectWidgets(widgets: IWidget[]) {
-    let reselection:string[] = [];
+    let reselection: string[] = [];
     for (let i = 0; i < widgets.length; i++) {
         let widget = widgets[i];
         reselection.push(widget.id);
@@ -134,7 +133,7 @@ async function reselectWidgets(widgets: IWidget[]) {
 }
 
 async function contextMenuHighlight(lang: string, widgets: IWidget[]) {
-    let fullData:IWidget[] = [];
+    let fullData: IWidget[] = [];
     for (let i = 0; i < widgets.length; i++) {
         let widget = widgets[i];
         const founded = await miro.board.widgets.get(widget);
@@ -143,15 +142,15 @@ async function contextMenuHighlight(lang: string, widgets: IWidget[]) {
     await highlightWidgets(lang, fullData);
 }
 
-async function showSettings(){
+async function showSettings() {
     await miro.board.ui.openModal('settings.html', {
         width: 600,
-        height: 300
+        height: 450
     });
 }
 
-async function highlightWidgets(lang: string, widgets:Array<IWidget>) {
-    if (ThemeContext.getInstance().currentTheme.getName() != settings.getTheme()){
+async function highlightWidgets(lang: string, widgets: Array<IWidget>) {
+    if (ThemeContext.getInstance().currentTheme.getName() != settings.getTheme()) {
         ThemeContext.getInstance().currentTheme = themeRegistry.getTheme(settings.getTheme());
     }
     if (widgets.length == 0) {
@@ -171,11 +170,10 @@ async function highlightWidgets(lang: string, widgets:Array<IWidget>) {
         if (highlightedText.length >= MAX_TEXT_SIZE) {
             miro.showErrorNotification('Highlight failed, due to possible loss of data');
             const message = `Highlighted length: ${highlightedText.length} Cleaned length: ${plainText.length}  Widget text length: ${widgetText.length}`;
-            Sentry.captureMessage(message);
             console.warn(message);
             continue;
         }
-        let updateData:any = {
+        let updateData: any = {
             id: widget.id,
             style: {
                 textAlign: 'l',
@@ -187,12 +185,12 @@ async function highlightWidgets(lang: string, widgets:Array<IWidget>) {
         };
 
         let backgroundColor = ThemeContext.getInstance().currentTheme.getBackgroundColor();
-        if (backgroundColor != null){
+        if (backgroundColor != null) {
             updateData.style.backgroundColor = backgroundColor;
         }
 
         let textColor = ThemeContext.getInstance().currentTheme.getTextColor();
-        if (textColor != null){
+        if (textColor != null) {
             updateData.style.textColor = textColor;
         }
 
@@ -207,19 +205,19 @@ async function highlightWidgets(lang: string, widgets:Array<IWidget>) {
 }
 
 const BLOCK_ELEMENTS = new Map<string, number>([
-    ['p',  1],
-    ['div',  1],
-    ['h1',  1],
-    ['h2',  1],
-    ['h3',  1],
-    ['h4',  1],
-    ['h5',  1],
-    ['h6',  1],
-    ['ul',  1],
-    ['ol',  1],
-    ['li',  1],
-    ['code',  1],
-    ['br',  1]
+    ['p', 1],
+    ['div', 1],
+    ['h1', 1],
+    ['h2', 1],
+    ['h3', 1],
+    ['h4', 1],
+    ['h5', 1],
+    ['h6', 1],
+    ['ul', 1],
+    ['ol', 1],
+    ['li', 1],
+    ['code', 1],
+    ['br', 1]
 ]);
 
 function getPlainText(widgetText: string) {
@@ -254,7 +252,7 @@ function getPlainText(widgetText: string) {
     }
 
     function isBlockElement(node: Node) {
-        if (node instanceof HTMLElement){
+        if (node instanceof HTMLElement) {
             return BLOCK_ELEMENTS.get(node.tagName.toLowerCase()) === 1;
         }
         return false;

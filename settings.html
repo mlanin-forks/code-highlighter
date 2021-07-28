@@ -1,54 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Color Highlighter Settings</title>
-    <link rel="stylesheet" type="text/css" href="https://miro.com/app/static/styles.1.0.css"/>
-
-    <script src="https://browser.sentry-cdn.com/5.9.1/bundle.min.js" integrity="sha384-/x1aHz0nKRd6zVUazsV6CbQvjJvr6zQL2CHbQZf3yoLkezyEtZUpqUNnOLW9Nt3v" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-        Sentry.init({
-            dsn: 'https://af5a66fee3174f318ab6c6ccf6ae2071@sentry.io/1831923'
-        });
-    </script>
+    <link rel="stylesheet" type="text/css" href="https://miro.com/app/static/styles.1.0.css" />
     <script type="text/javascript" src="https://miro.com/app/static/sdk.1.1.js"></script>
     <script type="text/javascript" src="settings.js"></script>
+    <style>
+        .miro-btn {
+            margin-left: 16px;
+        }
+    </style>
 </head>
+
 <body>
-<div style="padding: 20px 10px">
-    <a href="javascript:closeModal()" style="position: absolute; right: 20px; top: 10px;">close</a>
-    <h1>Code Highlighter Settings</h1>
-    <section id="languages" style="padding: 10px; line-height: 58px; text-align: center;">
-    </section>
-    <section id="themes" style="padding: 10px; line-height: 58px; text-align: center;">
-        <span class="miro-h2">Theme </span>
-        <select id="themes_select" class="miro-select miro-select--secondary">
-        </select>
-    </section>
-    <br />
-    <section style="text-align: center">
-        <a href="feedback.html">
-            <span class="miro-p-small">feedback</span>
-        </a>
-    </section>
-</div>
+    <div style="padding: 20px 10px">
+        <a href="javascript:closeModal()" style="position: absolute; right: 20px; top: 20px;">close</a>
+        <span class="miro-h1">Syntax Highlighter Settings</span>
+        <hr>
+
+        <p>To highlight your code, select the text field and click {} button again</p>
+
+        <section id="languages" style="padding: 10px; line-height: 58px; text-align: center;"></section>
+
+        <section id="themes" style="padding: 10px; line-height: 58px; text-align: center;">
+            <span class="miro-h3">Theme </span>
+            <select id="themes_select" class="miro-select miro-select--secondary">
+            </select>
+        </section>
+    </div>
 </body>
+
 </html>
 <script type="text/javascript">
     const languages = document.getElementById('languages');
     const currentLang = code.highlighter.settings.getLang();
-    for (let lang in code.highlighter.settings.languages){
+    for (let lang in code.highlighter.settings.languages) {
         const button = document.createElement("button");
         button.id = lang;
-        button.className = `miro-btn miro-btn--${currentLang === lang ? 'primary' : 'secondary' } miro-btn--medium`;
+        button.className = `miro-btn miro-btn--${currentLang === lang ? 'primary' : 'secondary'} miro-btn--medium`;
         button.textContent = lang;
         if (code.highlighter.settings.languages[lang] === 1) {
             button.onclick = () => {
                 const selectedButton = document.getElementById(code.highlighter.settings.getLang());
-                selectedButton.className = selectedButton.className.replace('primary', 'secondary');
+                selectedButton.className = selectedButton.className.replace('primary','secondary');
                 code.highlighter.settings.setLang(lang);
-                button.className = button.className.replace('secondary', 'primary');
+                button.className = button.className.replace('secondary','primary');
                 closeModal();
             };
         } else {
@@ -68,7 +66,7 @@
     }
     themeChooser.onchange = () => {
         const selectedTheme = themeChooser.options[themeChooser.selectedIndex].value;
-        if (code.highlighter.settings.getTheme() !== selectedTheme){
+        if (code.highlighter.settings.getTheme() !== selectedTheme) {
             code.highlighter.settings.setTheme(selectedTheme);
             miro.showNotification('saved');
         }

@@ -1,8 +1,8 @@
 import 'prismjs/components/prism-clike';
-import {DOM} from "../../config";
-import {CLikeTokenFactory} from './clike'
+import { DOM } from "../../config";
+import { CLikeTokenFactory } from './clike'
 
-class JavascriptTokenFactory extends CLikeTokenFactory {
+export class JavascriptTokenFactory extends CLikeTokenFactory {
 
     create(name: String, className: string): Node | false | null {
         let result = super.create(name, className);
@@ -18,6 +18,7 @@ class JavascriptTokenFactory extends CLikeTokenFactory {
             case 'interpolation':
             case 'interpolation-punctuation':
             case 'constant':
+            case 'variable':
                 return DOM.createElement('span', className);
             default:
                 return null;

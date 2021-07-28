@@ -1,17 +1,17 @@
-import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-markup-templating';
+import 'prismjs/components/prism-php';
 import { DOM } from "../../config";
-import { CLikeTokenFactory } from "./clike";
+import { JavascriptTokenFactory } from './javascript'
 
-export class JavaTokenFactory extends CLikeTokenFactory {
+class PHPTokenFactory extends JavascriptTokenFactory {
     create(name: String, className: string): Node | false | null {
         let result = super.create(name, className);
         if (result !== null) {
             return result;
         }
         switch (name) {
-            case 'namespace':
-            case 'generics':
-            case 'annotation':
+            case 'property':
                 return DOM.createElement('span', className);
             default:
                 return null;
@@ -19,4 +19,4 @@ export class JavaTokenFactory extends CLikeTokenFactory {
     }
 }
 
-export default new JavaTokenFactory();
+export default new PHPTokenFactory();
