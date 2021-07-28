@@ -6,9 +6,17 @@ const code = {
             _themeKey: 'ch_theme',
             _defaultLang: 'ts',
             languages:{
+                'php': 1,
+                'go': 1,
+                'python': 1,
                 'java': 1,
+                'kotlin': 1,
+                'swift': 1,
                 'js': 1,
-                'ts': 1
+                'ts': 1,
+                'jsx': 1,
+                'json': 1,
+                'http': 1
             },
             themes: {
                 'Default (PrismJS)': 'default',
