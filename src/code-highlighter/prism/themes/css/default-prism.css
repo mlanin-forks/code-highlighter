@@ -110,11 +110,13 @@ pre[class*="language-"] {
 
 .token.atrule,
 .token.attr-value,
+.language-json .token.boolean,
 .token.keyword {
 	color: #07a;
 }
 
 .token.function,
+.language-json .token.number,
 .token.class-name {
 	color: #DD4A68;
 }
