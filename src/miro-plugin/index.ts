@@ -36,7 +36,7 @@ const ts_3 = `<g id="Layer_1">
     <path d="M17.375,21.712 C22.004,22.136 18.531,15.02 20.537,12.966 C20.678,12.822 24.045,12.463 23.596,11.793 C22.991,10.891 21.24,11.566 20.439,10.113 C18.668,6.898 22.058,2.755 17.527,1.853" fill-opacity="0" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>`;
 
-const MAX_TEXT_SIZE = 5300;
+const MAX_TEXT_SIZE = 6000;
 
 miro.onReady(async () => {
     const authorized = await miro.isAuthorized();
